@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import TeacherBookings from "./components/TeacherBookings";
 import IsTeacher from "./components/isTeacher";
 import CreateBooking from "./components/CreateBooking";
+import BookingDetails from "./components/BookingDetails";
 const API_URL = "http://localhost:5005";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
   const getBookings = (token) => {    
 
     axios
-      .get(`${API_URL}/api/bookings`, { headers: { Authorization: `Bearer ${token}` } } )
+      .get(`${API_URL}/api/bookings`, { headers: { Authorization: `Bearer ${token}` } } )      
       .then((bookingsObj) => {        
 
         setBookings(bookingsObj.data);
@@ -39,7 +40,7 @@ function App() {
 
   
 
-  console.log("HERE bookings on App.js" + bookings);
+  
 
   return (
     <div className="App">
@@ -94,6 +95,9 @@ function App() {
             </IsPrivate>
           }
         />
+
+        <Route path="/booking/details/:id" element={<BookingDetails />} />
+
       </Routes>
     </div>
   );

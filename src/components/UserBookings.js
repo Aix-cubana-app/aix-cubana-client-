@@ -1,5 +1,6 @@
 
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -24,12 +25,14 @@ function UserBookings({ bookings, updateBookings }){
         ?  
         <div>
         {bookings.map( (booking) => {
+
+            
             return(
                 <div>
                 <p>{booking.location}</p>
-                <p>{booking.date} </p>
-                <p>{booking.service.title} </p>
-                <p>{booking.description} </p>               
+                <p>{booking.date} </p>                
+                <p>{booking.description} </p>
+                <Link to={`/booking/details/${booking._id}`}>More details</Link>               
                 
 
                 </div>
