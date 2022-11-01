@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 
@@ -16,12 +16,13 @@ function BookingDetails(){
     useEffect( () => {
         getBookingDetails(storedToken);
 
-    }, [id] )
+    }, [] )
 
     const getBookingDetails = (token) => {
 
         axios.get(process.env.REACT_APP_API_URL + "/api/booking/details/" + id, { headers: { Authorization: `Bearer ${token}` } } ) 
-        .then((BookingDetails) => {                               
+        .then((BookingDetails) => {    
+            console.log(BookingDetails.data)                           
             setDetails(BookingDetails.data)
         })
         .catch((err) => console.log("Problem getting the Booking from database" + err)
@@ -35,7 +36,13 @@ function BookingDetails(){
 
     return(
         <div className="container">
-            <h3>Location: {details.location}</h3>
+           
+            <p>Location: {details.location} </p>
+            <p>Date: {details.date} </p>            
+            <p>Description: {details.description} </p>
+            <p>Teacher: {details.teacher?.name}</p>
+            
+           
         </div>
 
     )

@@ -1,6 +1,6 @@
 // src/components/Navbar.js
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
@@ -13,24 +13,24 @@ function Navbar() {
   //  depending on the user being logged in or not
   return (
     <nav>
-      <Link to="/">
+      <NavLink to="/">
         <button>Home</button>
-      </Link>
+      </NavLink>
 
       {isLoggedIn && (
         <>
-          <Link to="/bookings/user">
+          <NavLink to="/bookings/user">
             <button>User Bookings</button>
-          </Link>
+          </NavLink>
 
-          <Link to="/bookings/create">
+          <NavLink to="/bookings/create">
             <button>Create Booking</button>
-          </Link>
+          </NavLink>
 
           {user.isTeacher && (            
-              <Link to="/bookings/teacher">
+              <NavLink to="/bookings/teacher">
                 <button>Teacher Bookings</button>
-              </Link>           
+              </NavLink>           
           )}
 
           <button onClick={logOutUser}>Logout</button>
@@ -40,14 +40,14 @@ function Navbar() {
 
       {!isLoggedIn && (
         <>
-          <Link to="/signup/">
+          <NavLink to="/signup/">
             {" "}
             <button>Sign Up</button>{" "}
-          </Link>
-          <Link to="/login/">
+          </NavLink>
+          <NavLink to="/login/">
             {" "}
             <button>Login</button>{" "}
-          </Link>
+          </NavLink>
         </>
       )}
     </nav>

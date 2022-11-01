@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -31,7 +31,7 @@ function SignupPage() {
     const requestBody = { email, password, name, isTeacher };
    
     axios
-      .post(`${API_URL}/auth/signup`, requestBody)
+      .post(`${process.env.REACT_APP_API_URL}/auth/signup`, requestBody)
       .then((newUser) => {
         console.log("You created a new User");
         navigate("/");

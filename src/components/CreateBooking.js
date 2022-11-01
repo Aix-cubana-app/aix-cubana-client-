@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.context';
 
-const API_URL = "http://localhost:5005";
+
 
 function CreateBooking({updateBookings}) {
 
@@ -31,7 +31,7 @@ function CreateBooking({updateBookings}) {
 
   const getlistOfTeachers = (token) => {
     axios
-      .get(`${API_URL}/auth/users/teachers`, {
+      .get(`${process.env.REACT_APP_API_URL}/auth/users/teachers`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((listOfTeacher) => {
@@ -44,7 +44,7 @@ function CreateBooking({updateBookings}) {
 
   const getlistOfServices = (token) => {
     axios
-      .get(`${API_URL}/api/service/services/${teacher}`,
+      .get(`${process.env.REACT_APP_API_URL}/api/service/services/${teacher}`,
        { headers: { Authorization: `Bearer ${token}` },
       })
       .then((listOfServices) => {
@@ -68,7 +68,7 @@ function CreateBooking({updateBookings}) {
         owner: user._id
     }
 
-    axios.post(`${API_URL}/api/booking/create`, newBooking ,  { headers: { Authorization: `Bearer ${storedToken}`}} )
+    axios.post(`${process.env.REACT_APP_API_URL}/api/booking/create`, newBooking ,  { headers: { Authorization: `Bearer ${storedToken}`}} )
     .then( booking => {
         updateBookings(storedToken);
         navigate("/bookings/user")

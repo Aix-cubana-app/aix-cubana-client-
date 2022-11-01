@@ -6,7 +6,7 @@ import LoginPage from "./components/Login";
 import IsPrivate from "./components/IsPrivate";
 import UserBookings from "./components/UserBookings";
 import IsAnon from "./components/IsAnon";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
@@ -14,11 +14,13 @@ import TeacherBookings from "./components/TeacherBookings";
 import IsTeacher from "./components/isTeacher";
 import CreateBooking from "./components/CreateBooking";
 import BookingDetails from "./components/BookingDetails";
-const API_URL = "http://localhost:5005";
+
+
 
 function App() {
 
   const [ bookings, setBookings ] = useState([]); 
+  
 
 
 
@@ -27,7 +29,7 @@ function App() {
   const getBookings = (token) => {    
 
     axios
-      .get(`${API_URL}/api/bookings`, { headers: { Authorization: `Bearer ${token}` } } )      
+      .get(`${process.env.REACT_APP_API_URL}/api/bookings`, { headers: { Authorization: `Bearer ${token}` } } )      
       .then((bookingsObj) => {        
 
         setBookings(bookingsObj.data);
@@ -97,6 +99,7 @@ function App() {
         />
 
         <Route path="/booking/details/:id" element={<BookingDetails />} />
+        
 
       </Routes>
     </div>

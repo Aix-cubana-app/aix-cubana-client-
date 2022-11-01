@@ -8,10 +8,13 @@ function UserBookings({ bookings, updateBookings }){
     
     const storedToken = localStorage.getItem("authToken");
     
+    
 
+    // eslint-disable-next-line 
     useEffect( () => {
         updateBookings(storedToken);
-    }, [])
+    }, [] ) 
+
   
 
   
@@ -32,7 +35,8 @@ function UserBookings({ bookings, updateBookings }){
                 <p>{booking.location}</p>
                 <p>{booking.date} </p>                
                 <p>{booking.description} </p>
-                <Link to={`/booking/details/${booking._id}`}>More details</Link>               
+                <Link to={`/booking/details/${booking._id}`}>More details</Link>  
+                            
                 
 
                 </div>

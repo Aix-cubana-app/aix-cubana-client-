@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function TeacherBookings({ bookings, updateBookings }){
 
@@ -24,6 +25,7 @@ function TeacherBookings({ bookings, updateBookings }){
                 <p>{booking.description} </p>
                 <p>{booking.teacher.name} </p>
                 <p>{booking.owner.name} </p>
+                <Link to={`/booking/details/${booking._id}`}>More details</Link>
 
                 </div>
                 )
