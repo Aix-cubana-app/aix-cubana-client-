@@ -14,6 +14,7 @@ import TeacherBookings from "./components/TeacherBookings";
 import IsTeacher from "./components/isTeacher";
 import CreateBooking from "./components/CreateBooking";
 import BookingDetails from "./components/BookingDetails";
+import TeacherServices from "./components/TeacherServices";
 
 
 
@@ -100,6 +101,14 @@ function App() {
 
         <Route path="/booking/details/:id" element={<BookingDetails />} />
         
+         <Route
+          path="/services"
+          element={
+            <IsTeacher>
+              <TeacherServices  />
+            </IsTeacher>
+          }
+        />
 
       </Routes>
     </div>
