@@ -25,9 +25,14 @@ function CreateBooking({updateBookings}) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getlistOfTeachers(storedToken);
+    getlistOfTeachers(storedToken);    
+  }, []);
+
+  useEffect(() => {   
     getlistOfServices(storedToken);
   }, [teacher]);
+
+
 
   const getlistOfTeachers = (token) => {
     axios
@@ -43,16 +48,22 @@ function CreateBooking({updateBookings}) {
   };
 
   const getlistOfServices = (token) => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/service/services/${teacher}`,
-       { headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((listOfServices) => {
-        setServicesList(listOfServices.data);
-      })
-      .catch((err) =>
-        console.log("Problem getting the teachers from database" + err)
-      );
+
+    if(teacher){
+      
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/service/services/${teacher}`,
+         { headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((listOfServices) => {
+          setServicesList(listOfServices.data);
+        })
+        .catch((err) =>
+          console.log("Problem getting the teachers from database" + err)
+        );
+
+    }
+
   };
 
   const handleSubmit = (e) => {
@@ -130,8 +141,8 @@ function CreateBooking({updateBookings}) {
             <option value="" selected>
               Select a teacher
             </option>
-            {teacherList.map((teacher) => {
-              return <option value={teacher._id}>{teacher.name}</option>;
+            {teacherList.map( (teacher) => {
+              return <option key={teacher._id} value={teacher._id}>{teacher.name}</option>;
             })}
           </select>
         </div>
@@ -152,7 +163,7 @@ function CreateBooking({updateBookings}) {
                 Select a service
               </option>
               {servicesList.map((service) => {
-                return <option value={service._id}>{service.title}</option>;
+                return <option key={service._id} value={service._id}>{service.title}</option>;
               })}
             </select>
           </div>

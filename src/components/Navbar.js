@@ -28,14 +28,17 @@ function Navbar() {
           </NavLink>
 
           {user.isTeacher && ( 
-              <div>
+              <>
               <NavLink to="/bookings/teacher">
                 <button>Teacher Bookings</button>
               </NavLink>   
               <NavLink to="/services">
                 <button>Teacher Services</button>
-              </NavLink>   
-              </div>           
+              </NavLink>  
+              <NavLink to="/service/create">
+                <button>Create Service</button>
+              </NavLink> 
+              </>           
           )}
 
           <button onClick={logOutUser}>Logout</button>

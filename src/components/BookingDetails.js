@@ -22,7 +22,7 @@ function BookingDetails(){
 
         axios.get(process.env.REACT_APP_API_URL + "/api/booking/details/" + id, { headers: { Authorization: `Bearer ${token}` } } ) 
         .then((BookingDetails) => {    
-            console.log(BookingDetails.data)                           
+                                       
             setDetails(BookingDetails.data)
         })
         .catch((err) => console.log("Problem getting the Booking from database" + err)

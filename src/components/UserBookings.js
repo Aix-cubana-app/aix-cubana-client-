@@ -31,11 +31,13 @@ function UserBookings({ bookings, updateBookings }){
 
             
             return(
-                <div>
+                <div key={booking._id}>
                 <p>{booking.location}</p>
                 <p>{booking.date} </p>                
                 <p>{booking.description} </p>
-                <Link to={`/booking/details/${booking._id}`}>More details</Link>  
+                <Link to={`/booking/details/${booking._id}`}>
+                    <button>More Details</button>
+                </Link>  
                             
                 
 

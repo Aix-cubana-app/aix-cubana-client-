@@ -15,7 +15,8 @@ import IsTeacher from "./components/isTeacher";
 import CreateBooking from "./components/CreateBooking";
 import BookingDetails from "./components/BookingDetails";
 import TeacherServices from "./components/TeacherServices";
-
+import CreateService from "./components/CreateService";
+import ServiceEdit from "./components/ServiceEdit"
 
 
 function App() {
@@ -108,7 +109,17 @@ function App() {
               <TeacherServices  />
             </IsTeacher>
           }
-        />
+         />
+         <Route
+          path="/service/create"
+          element={
+            <IsTeacher>
+              <CreateService  />
+            </IsTeacher>
+          }
+         />
+
+<Route path="/service/edit/:id" element={<ServiceEdit />} />
 
       </Routes>
     </div>

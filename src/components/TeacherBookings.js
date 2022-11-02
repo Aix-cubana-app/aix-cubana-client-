@@ -17,7 +17,7 @@ function TeacherBookings({ bookings, updateBookings }){
         <div>
         {bookings.map( (booking) => {
             return(
-                <div>
+                <div key={booking._id}>
                 <p>{booking.location}</p>
                 <p>{booking.date} </p>
                 <p>{booking.service.title} </p>
@@ -25,7 +25,9 @@ function TeacherBookings({ bookings, updateBookings }){
                 <p>{booking.description} </p>
                 <p>{booking.teacher.name} </p>
                 <p>{booking.owner.name} </p>
-                <Link to={`/booking/details/${booking._id}`}>More details</Link>
+                <Link to={`/booking/details/${booking._id}`}>
+                    <button>More Details</button>
+                </Link>
 
                 </div>
                 )
