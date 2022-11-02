@@ -16,7 +16,8 @@ import CreateBooking from "./components/CreateBooking";
 import BookingDetails from "./components/BookingDetails";
 import TeacherServices from "./components/TeacherServices";
 import NavbarPage from "./components/NavbarPage";
-
+import CreateService from "./components/CreateService";
+import ServiceEdit from "./components/ServiceEdit"
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       .get(`${process.env.REACT_APP_API_URL}/api/bookings`, { headers: { Authorization: `Bearer ${token}` } } )      
       .then((bookingsObj) => {        
 
+        console.log(bookingsObj.data);
         setBookings(bookingsObj.data);
         
       })
@@ -109,7 +111,17 @@ function App() {
               <TeacherServices  />
             </IsTeacher>
           }
-        />
+         />
+         <Route
+          path="/service/create"
+          element={
+            <IsTeacher>
+              <CreateService  />
+            </IsTeacher>
+          }
+         />
+
+<Route path="/service/edit/:id" element={<ServiceEdit />} />
 
       </Routes>
     </div>

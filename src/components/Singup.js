@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -20,16 +21,14 @@ function SignupPage() {
   const handleName = (e) => setName(e.target.value);
 
   const handleIsTeacher = () => {
-    setIsTeacher(!isTeacher)
-  }
+    setIsTeacher(!isTeacher);
+  };
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
 
-    
-
     const requestBody = { email, password, name, isTeacher };
-   
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/signup`, requestBody)
       .then((newUser) => {
@@ -48,45 +47,67 @@ function SignupPage() {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
-      <div id="form-div">
-        <form onSubmit={handleSignupSubmit}>
-          <label>Email:</label>
-          <input
+    <Container>
+      <Form onSubmit={handleSignupSubmit}>
+        <Form.Group className="mb-3" controlId="signUpEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
             type="email"
+            placeholder="Enter email"
             name="email"
             value={email}
             onChange={handleEmail}
           />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-          <label>Password:</label>
-          <input
+        <Form.Group className="mb-3" controlId="signUpPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
+            placeholder="Password"
             name="password"
             value={password}
             onChange={handlePassword}
           />
+          <Form.Text id="passwordHelpBlock" muted>
+            Your password must be 8-20 characters long, contain letters and
+            numbers, and must not contain spaces, special characters, or emoji.
+          </Form.Text>
+        </Form.Group>
 
-          <label>Name:</label>
-          <input type="text" name="name" value={name} onChange={handleName} />
+        <Form.Group className="mb-3" controlId="signUpName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Your first and last Name"
+            name="name"
+            value={name}
+            onChange={handleName}
+          />
+        </Form.Group>
 
-          <label for="is-teacher"> Are you a dance teacher?</label>
-          <input
-              type="checkbox"
-              checked={isTeacher}
-              onChange={handleIsTeacher}
-            />
+        <Form.Group className="mb-3" controlId="isTeacherCheckbox">
+          <Form.Check
+            type="checkbox"
+            label="Are you a teacher"
+            checked={isTeacher}
+            onChange={handleIsTeacher}
+          />
+        </Form.Group>
 
-          <button type="submit">Sign Up</button>
-        </form>
-      </div>
+        <Button variant="primary" type="submit">
+          SingUp
+        </Button>
+      </Form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
-    </div>
+      <Container>
+        <p>Already have account?</p>
+        <Link to={"/login"}> Login</Link>
+      </Container>
+    </Container>
   );
 }
 

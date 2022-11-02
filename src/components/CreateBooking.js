@@ -2,13 +2,12 @@ import axios from "axios";
 
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from '../context/auth.context';
+import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
 
-
-
-function CreateBooking({updateBookings}) {
-
-  
+function CreateBooking({ updateBookings }) {
   const { user } = useContext(AuthContext);
 
   const storedToken = localStorage.getItem("authToken");
@@ -20,12 +19,14 @@ function CreateBooking({updateBookings}) {
   const [service, setService] = useState([]);
   const [description, setDescription] = useState("");
   const [teacher, setTeacher] = useState("");
-  
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getlistOfTeachers(storedToken);
+  }, []);
+
+  useEffect(() => {
     getlistOfServices(storedToken);
   }, [teacher]);
 
@@ -43,69 +44,65 @@ function CreateBooking({updateBookings}) {
   };
 
   const getlistOfServices = (token) => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/service/services/${teacher}`,
-       { headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((listOfServices) => {
-        setServicesList(listOfServices.data);
-      })
-      .catch((err) =>
-        console.log("Problem getting the teachers from database" + err)
-      );
+    if (teacher) {
+      axios
+        .get(
+          `${process.env.REACT_APP_API_URL}/api/service/services/${teacher}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then((listOfServices) => {
+          setServicesList(listOfServices.data);
+        })
+        .catch((err) =>
+          console.log("Problem getting the teachers from database" + err)
+        );
+    }
   };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     const newBooking = {
-        location,
-        date,
-        service,
-        description,
-        teacher,
-        owner: user._id
-    }
+      location,
+      date,
+      service,
+      description,
+      teacher,
+      owner: user._id,
+    };
 
-    axios.post(`${process.env.REACT_APP_API_URL}/api/booking/create`, newBooking ,  { headers: { Authorization: `Bearer ${storedToken}`}} )
-    .then( booking => {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/booking/create`, newBooking, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((booking) => {
         updateBookings(storedToken);
-        navigate("/bookings/user")
-    })
-    .catch((err) =>
-        console.log("Problem creating a new Booking" + err)
-      );
-
+        navigate("/bookings/user");
+      })
+      .catch((err) => console.log("Problem creating a new Booking" + err));
   };
 
   return (
-    <div className="container">
-        
-      <form id="create-booking-form" onSubmit={handleSubmit}>
+    <Container>
+      <Form onSubmit={handleSubmit} id="create-booking-form">
+        <Form.Group className="mb-3" controlId="formLocation">
+          <Form.Label>Location:</Form.Label>
+          <Form.Control
+            size="sm"
+            type="text"
+            name="location"
+            value={location}
+            placeholder="City here"
+            onChange={(e) => {
+              setLocation(e.target.value);
+            }}
+          />
+        </Form.Group>
 
-        <div>
-          <div>
-            <label for="location-form">Location:</label>
-          </div>
-
-          <div>
-            <input
-              id="location-form"
-              type="text"
-              name="location"
-              value={location}
-              placeholder="City here"
-              onChange={(e) => {
-                setLocation(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label for="date-form">Date</label>          
-          <input
+        <Form.Group className="mb-3" controlId="formDate">
+          <Form.Label>Date:</Form.Label>
+          <Form.Control
+            size="sm"
             id="date-form"
             type="date"
             name="date"
@@ -114,33 +111,32 @@ function CreateBooking({updateBookings}) {
               setDate(e.target.value);
             }}
           />
-        </div>
+        </Form.Group>
 
-        <div>
-          <label for="teacher-select">Choose a teacher:</label>
-
-          <select
-            name="teacher"
-            id="teacher-select"
-            form="create-booking-form"
-            onChange={(e) => {
-              setTeacher(e.target.value);
-            }}
-          >
-            <option value="" selected>
-              Select a teacher
-            </option>
-            {teacherList.map((teacher) => {
-              return <option value={teacher._id}>{teacher.name}</option>;
-            })}
-          </select>
-        </div>
+        <Form.Select
+          size="sm"
+          aria-label="Select a teacher"
+          name="teacher"
+          id="teacher-select"
+          form="create-booking-form"
+          onChange={(e) => {
+            setTeacher(e.target.value);
+          }}
+        >
+          <option value="">Teachers</option>
+          {teacherList.map((teacher) => {
+            return (
+              <option key={teacher._id} value={teacher._id}>
+                {teacher.name}{" "}
+              </option>
+            );
+          })}
+        </Form.Select>
 
         {teacher ? (
-          <div>
-            <label for="service-select">Choose a Service:</label>
-
-            <select
+          <>
+            <Form.Select
+              size="sm"
               name="service"
               id="service-select"
               form="create-booking-form"
@@ -148,41 +144,41 @@ function CreateBooking({updateBookings}) {
                 setService(e.target.value);
               }}
             >
-              <option value="" selected>
-                Select a service
-              </option>
+              <option value="">Services</option>
               {servicesList.map((service) => {
-                return <option value={service._id}>{service.title}</option>;
+                return (
+                  <option key={service._id} value={service._id}>
+                    {service.title}
+                  </option>
+                );
               })}
-            </select>
-          </div>
+            </Form.Select>
+          </>
         ) : (
           <p>You need to pick a teacher</p>
         )}
-        
 
-        <div>
-          <div>
-            <label for="textarea-form">Description:</label>
-          </div>
+        <Form.Group className="mb-3" controlId="formDescription">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            size="sm"
+            id="textarea-form"
+            type="text"
+            name="description"
+            value={description}
+            placeholder="Here a short description of your request"
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          CreateBooking
+        </Button>
+      </Form>
+    </Container>
 
-          <div>
-            <textarea
-              id="textarea-form"
-              type="text"
-              name="description"
-              value={description}
-              placeholder="Here a short description of your rquest"
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-
-        <button>Create Booking</button>
-      </form>
-    </div>
+   
   );
 }
 
