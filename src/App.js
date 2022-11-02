@@ -1,5 +1,5 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
+
 
 import SignupPage from "./components/Singup";
 import LoginPage from "./components/Login";
@@ -15,6 +15,7 @@ import IsTeacher from "./components/isTeacher";
 import CreateBooking from "./components/CreateBooking";
 import BookingDetails from "./components/BookingDetails";
 import TeacherServices from "./components/TeacherServices";
+import NavbarPage from "./components/NavbarPage";
 
 
 
@@ -47,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <NavbarPage />
 
       <Routes>
         <Route  
