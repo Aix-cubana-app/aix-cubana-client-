@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -11,12 +11,21 @@ import { AuthContext } from "../context/auth.context";
 
 function BookingDetails(){
 
+    const navigate = useNavigate();
+
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
 
     const { id } = useParams();
 
     const [details, setDetails] = useState({});
+
+    
+  const myStyle = {
+    margin: "2rem",  
+    
+    width: "18rem" 
+  };
 
     useEffect( () => {
         getBookingDetails(storedToken);
@@ -25,7 +34,7 @@ function BookingDetails(){
 
     const getBookingDetails = (token) => {
 
-        axios.get(process.env.REACT_APP_API_URL + "/api/booking/details/" + id, { headers: { Authorization: `Bearer ${token}` } } ) 
+        axios.get(process.env.REACT_APP_API_URL + "/api/booking/" + id, { headers: { Authorization: `Bearer ${token}` } } ) 
         .then((BookingDetails) => {            
                                        
             setDetails(BookingDetails.data)
@@ -42,7 +51,7 @@ function BookingDetails(){
     return(
         <Container>
            
-           <Card border="dark" style={{ width: "18rem" }}>
+           <Card border="dark" style={myStyle}>
                 <Card.Header>{details.service?.title}</Card.Header>
                 <Card.Body>
                   <Card.Title>{details.service?.style}</Card.Title>
@@ -55,9 +64,9 @@ function BookingDetails(){
                   </>
                   :  
                   <Card.Text>Teacher: {details.teacher?.name}</Card.Text>}
-                  <Link to={`/`}>
-                    <Button variant="outline-dark">HomePage</Button>
-                  </Link>
+                  
+                  <Button onClick={ () => navigate(-1)} variant="outline-dark">Back</Button>
+                  
                   
                   
                  

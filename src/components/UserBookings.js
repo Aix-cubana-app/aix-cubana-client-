@@ -9,28 +9,35 @@ import { Col, Row } from "react-bootstrap";
 function UserBookings({ bookings, updateBookings }) {
   const storedToken = localStorage.getItem("authToken");
 
+  const myStyle = {
+    margin: "2rem",  
+    
+    width: "18rem" 
+  };
+
   // eslint-disable-next-line
   useEffect(() => {
     updateBookings(storedToken);
   }, []);
 
   return (
-    <Container >
+    <Container>
       <Row className="justify-content-md-center">
         {bookings && bookings.length !== 0 ? (
           <>
             {bookings.map((booking) => {
+              
               return (
-                <Col xs={12} md={6} lg={4}>
+                <Col xs={12} md={6} lg={4} mb={3}>
 
-                <Card
+                <Card                
                   key={booking._id}
                   border="dark"
-                  style={{ width: "18rem" }}
+                  style={myStyle}
                 >
                   <Card.Header>{booking.location}</Card.Header>
                   <Card.Body>
-                    <Card.Title>{booking.service.title}</Card.Title>
+                    <Card.Title>{booking.service?.title}</Card.Title>
                     <Card.Text>{booking.description}</Card.Text>
                     <Link to={`/booking/details/${booking._id}`}>
                       <Button variant="outline-dark">More Details</Button>

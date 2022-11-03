@@ -35,6 +35,9 @@ function App() {
       );
   };
 
+  console.log(bookings.teacherbookings)
+
+  
   return (
     <div className="App">
       <NavbarPage />

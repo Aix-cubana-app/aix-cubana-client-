@@ -6,7 +6,15 @@ import Container from "react-bootstrap/Container";
 import FormContainer from "./FormContainer";
 
 function TeacherBookings({ bookings, updateBookings }) {
+
   const storedToken = localStorage.getItem("authToken");
+
+  const myStyle = {
+    margin: "2rem",  
+    
+    width: "18rem" 
+  };
+ 
 
   useEffect(() => {
     updateBookings(storedToken);
@@ -17,11 +25,12 @@ function TeacherBookings({ bookings, updateBookings }) {
       {bookings && bookings.length !== 0 ? (
         <div>
           {bookings.map((booking) => {
+            
             return (
-              <Card key={booking._id} border="dark" style={{ width: "18rem" }}>
-                <Card.Header>{booking.service.title}</Card.Header>
+              <Card key={booking._id} border="dark" style={myStyle}>
+                <Card.Header>{booking.service?.title}</Card.Header>
                 <Card.Body>
-                  <Card.Title>{booking.service.style}</Card.Title>
+                  <Card.Title>{booking.service?.style}</Card.Title>
                   <Card.Text>Description: {booking.description}</Card.Text>
                   <Card.Text>Date: {booking.date}</Card.Text>
                   <Link to={`/booking/details/${booking._id}`}>

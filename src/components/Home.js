@@ -1,10 +1,13 @@
 import { Container } from "react-bootstrap";
+import CarouselPage from "./CarouselPage";
 
 function Home(){    
 
     return(
         <Container>
-            <img src="https://www.superiorballroomdance.com/wp-content/uploads/2015/10/Ballroom-Dancers.jpg" alt="dancing people" />
+           <CarouselPage>
+
+           </CarouselPage>
             
 
 

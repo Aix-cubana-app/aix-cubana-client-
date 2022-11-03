@@ -27,7 +27,7 @@ function ServiceEdit() {
 
   const getServiceDetails = (token) => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/api/service/details/" + id, {
+      .get(process.env.REACT_APP_API_URL + "/api/service/" + id, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((serviceDetails) => {
@@ -44,13 +44,11 @@ function ServiceEdit() {
 
   const deleteService = (token, serviceId) => {
     axios
-      .delete(
-        `${process.env.REACT_APP_API_URL}/api/service/delete/${serviceId}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((deletedService) => {
-        console.log("You deleted the service with ID" + deleteService._id);
-        navigate("/services");
+      .delete(`${process.env.REACT_APP_API_URL}/api/service/${serviceId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((deletedService) => {       
+        navigate(-1);
       })
       .catch((err) =>
         console.log("Problem deleting the services from database" + err)
@@ -74,7 +72,7 @@ function ServiceEdit() {
 
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/api/service/update/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/service/${id}`,
         updatedService,
         {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -98,6 +96,7 @@ function ServiceEdit() {
             name="title"
             value={title}
             placeholder="Here the title"
+            required
             onChange={(e) => {
               setTitle(e.target.value);
             }}
@@ -112,6 +111,7 @@ function ServiceEdit() {
             type="number"
             name="price"
             value={price}
+            required
             onChange={(e) => {
               setPrice(e.target.value);
             }}
@@ -127,6 +127,7 @@ function ServiceEdit() {
             name="style"
             value={style}
             placeholder="The dancing style here"
+            required
             onChange={(e) => {
               setStyle(e.target.value);
             }}
@@ -139,6 +140,7 @@ function ServiceEdit() {
           name="level"
           id="level-select"
           form="create-service-form"
+          required
           onChange={(e) => {
             setLevel(e.target.value);
           }}
@@ -149,9 +151,11 @@ function ServiceEdit() {
           <option value="Advance"> Advance</option>
         </Form.Select>
 
-        <Button variant="primary" type="submit">
-          CreateService
+        <Button variant="primary" type="submit">        
+          UpdateService
         </Button>
+        <Button onClick={ () => navigate(-1)} variant="outline-dark">Back</Button>
+        <Button onClick={ () => deleteService( storedToken, id )} variant="danger">Delete</Button>
       </Form>
     </FormContainer>
   );
