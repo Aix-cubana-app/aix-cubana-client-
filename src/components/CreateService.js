@@ -45,7 +45,7 @@ function CreateService() {
   return (
     <Container>
       <Form onSubmit={handleSubmit} id="create-service-form">
-        <Form.Group className="mb-3" controlId="formServiceName">
+        <Form.Group className="mb-3">
           <Form.Label>Service Name:</Form.Label>
           <Form.Control
             size="sm"
@@ -60,7 +60,7 @@ function CreateService() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formPrice">
+        <Form.Group className="mb-3" >
           <Form.Label>Price:</Form.Label>
           <Form.Control
             size="sm"
@@ -74,7 +74,7 @@ function CreateService() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formStyle">
+        <Form.Group className="mb-3" >
           <Form.Label>Dancing Style:</Form.Label>
           <Form.Control
             size="sm"

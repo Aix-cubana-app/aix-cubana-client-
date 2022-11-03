@@ -3,9 +3,12 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import FormContainer from "./FormContainer";
 
 function ServiceEdit() {
-
   const storedToken = localStorage.getItem("authToken");
   const { user } = useContext(AuthContext);
 
@@ -56,7 +59,6 @@ function ServiceEdit() {
 
   //Handling the form
 
-
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -85,86 +87,73 @@ function ServiceEdit() {
   };
 
   return (
-    <div className="container">
-      <form id="create-service-form" onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <label for="title-form">Title:</label>
-          </div>
-
-          <div>
-            <input
-              id="title-form"
-              type="text"
-              name="title"
-              value={title}
-              placeholder="Here the title"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-
-        <div>
-          <div>
-            <label for="price-form">Price:</label>
-          </div>
-
-          <div>
-            <input
-              id="price-form"
-              type="number"
-              name="price"
-              value={price}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-
-        <div>
-          <div>
-            <label for="style-form">Style:</label>
-          </div>
-
-          <div>
-            <input
-              id="style-form"
-              type="text"
-              name="style"
-              value={style}
-              placeholder="The dancing style here"
-              onChange={(e) => {
-                setStyle(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label for="level-select">Choose a level:</label>
-
-          <select
-            name="level"
-            id="level-select"
-            form="create-service-form"
-            value={level}
+    <FormContainer>
+      <Form onSubmit={handleSubmit} id="edit-service-form">
+        <Form.Group className="mb-3">
+          <Form.Label>Service Name:</Form.Label>
+          <Form.Control
+            size="sm"
+            id="title-form"
+            type="text"
+            name="title"
+            value={title}
+            placeholder="Here the title"
             onChange={(e) => {
-              setLevel(e.target.value);
+              setTitle(e.target.value);
             }}
-          >
-            <option value="Beginner"> Beginner </option>
-            <option value="Middle"> Middle</option>
-            <option value="Advance"> Advance</option>
-          </select>
-        </div>
+          />
+        </Form.Group>
 
-        <button>Update Service</button>
-      </form>
-      <button onClick={() => deleteService(storedToken, id)}>Delete</button>
-    </div>
+        <Form.Group className="mb-3">
+          <Form.Label>Price:</Form.Label>
+          <Form.Control
+            size="sm"
+            id="price-form"
+            type="number"
+            name="price"
+            value={price}
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Dancing Style:</Form.Label>
+          <Form.Control
+            size="sm"
+            id="style-form"
+            type="text"
+            name="style"
+            value={style}
+            placeholder="The dancing style here"
+            onChange={(e) => {
+              setStyle(e.target.value);
+            }}
+          />
+        </Form.Group>
+
+        <Form.Select
+          size="sm"
+          aria-label="Choose a level"
+          name="level"
+          id="level-select"
+          form="create-service-form"
+          onChange={(e) => {
+            setLevel(e.target.value);
+          }}
+        >
+          <option value="">Level</option>
+          <option value="Beginner"> Beginner </option>
+          <option value="Middle"> Middle</option>
+          <option value="Advance"> Advance</option>
+        </Form.Select>
+
+        <Button variant="primary" type="submit">
+          CreateService
+        </Button>
+      </Form>
+    </FormContainer>
   );
 }
 

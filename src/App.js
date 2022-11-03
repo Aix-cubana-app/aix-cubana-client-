@@ -1,6 +1,5 @@
 import "./App.css";
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import SignupPage from "./components/Singup";
 import LoginPage from "./components/Login";
 import IsPrivate from "./components/IsPrivate";
@@ -17,48 +16,31 @@ import BookingDetails from "./components/BookingDetails";
 import TeacherServices from "./components/TeacherServices";
 import NavbarPage from "./components/NavbarPage";
 import CreateService from "./components/CreateService";
-import ServiceEdit from "./components/ServiceEdit"
-
+import ServiceEdit from "./components/ServiceEdit";
+import { Container } from "react-bootstrap";
 
 function App() {
+  const [bookings, setBookings] = useState([]);
 
-  const [ bookings, setBookings ] = useState([]); 
-  
-
-
-
-  
-
-  const getBookings = (token) => {    
-
+  const getBookings = (token) => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/bookings`, { headers: { Authorization: `Bearer ${token}` } } )      
-      .then((bookingsObj) => {        
-
-        console.log(bookingsObj.data);
+      .get(`${process.env.REACT_APP_API_URL}/api/bookings`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((bookingsObj) => {
         setBookings(bookingsObj.data);
-        
       })
       .catch((err) =>
         console.log("Problem getting the bookings from database" + err)
       );
   };
 
-  
-
-  
-
   return (
     <div className="App">
       <NavbarPage />
 
       <Routes>
-        <Route  
-          path="/"
-          element={
-            <Home />
-          }
-        />
+        <Route path="/" element={<Home />} />
 
         <Route
           path="/signup/"
@@ -81,7 +63,10 @@ function App() {
           path="/bookings/user"
           element={
             <IsPrivate>
-              <UserBookings bookings={bookings.bookings} updateBookings={getBookings}  />
+              <UserBookings
+                bookings={bookings.bookings}
+                updateBookings={getBookings}
+              />
             </IsPrivate>
           }
         />
@@ -89,7 +74,10 @@ function App() {
           path="/bookings/teacher"
           element={
             <IsTeacher>
-              <TeacherBookings bookings={bookings.teacherbookings} updateBookings={getBookings}  />
+              <TeacherBookings
+                bookings={bookings.teacherbookings}
+                updateBookings={getBookings}
+              />
             </IsTeacher>
           }
         />
@@ -103,27 +91,30 @@ function App() {
         />
 
         <Route path="/booking/details/:id" element={<BookingDetails />} />
-        
-         <Route
+
+        <Route
           path="/services"
           element={
             <IsTeacher>
-              <TeacherServices  />
+              <TeacherServices />
             </IsTeacher>
           }
-         />
-         <Route
+        />
+        <Route
           path="/service/create"
           element={
             <IsTeacher>
-              <CreateService  />
+              <CreateService />
             </IsTeacher>
           }
-         />
+        />
 
-<Route path="/service/edit/:id" element={<ServiceEdit />} />
-
+        <Route path="/service/edit/:id" element={<ServiceEdit />} />
       </Routes>
+
+
+        
+
     </div>
   );
 }

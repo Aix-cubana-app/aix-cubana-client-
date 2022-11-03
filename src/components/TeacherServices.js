@@ -2,6 +2,9 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 function TeacherServices({ bookings, updateBookings }) {
   const storedToken = localStorage.getItem("authToken");
@@ -33,28 +36,40 @@ function TeacherServices({ bookings, updateBookings }) {
   
 
   return (
-    <div className="container">
+    <Container>
       {services && services.length !== 0 ? (
         <div>
           {services.map((service) => {
             return (
-              <div key={service._id}>
-                <h3>{service.title}</h3>
-                <p>{service.price} </p>
-                <p>{service.style} </p>
-                <p>{service.level} </p>
-                <Link to={"/service/edit/" + service._id}>
-                    <button>Edit</button>
-                </Link>               
-                              
-              </div>
-            );
+
+
+              <Card key={service._id} border="dark" style={{ width: "18rem" }}>
+                <Card.Header>{service.title}</Card.Header>
+                <Card.Body>
+                  <Card.Title>{service.style}</Card.Title>
+                  <Card.Text>Price: {service.price}</Card.Text>                  
+                  <Card.Text>Style: {service.level}</Card.Text>
+                  <Link to={`/service/edit/${service._id}`}>
+                    <Button variant="outline-dark">Edit</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+
+
+
+            )
+
+
+
+
+
+             
           })}
         </div>
       ) : (
         <h1>You have no services</h1>
       )}
-    </div>
+    </Container>
   );
 }
 

@@ -85,7 +85,7 @@ function CreateBooking({ updateBookings }) {
   return (
     <Container>
       <Form onSubmit={handleSubmit} id="create-booking-form">
-        <Form.Group className="mb-3" controlId="formLocation">
+        <Form.Group className="mb-3" >
           <Form.Label>Location:</Form.Label>
           <Form.Control
             size="sm"
@@ -99,7 +99,7 @@ function CreateBooking({ updateBookings }) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formDate">
+        <Form.Group className="mb-3" >
           <Form.Label>Date:</Form.Label>
           <Form.Control
             size="sm"
@@ -158,7 +158,7 @@ function CreateBooking({ updateBookings }) {
           <p>You need to pick a teacher</p>
         )}
 
-        <Form.Group className="mb-3" controlId="formDescription">
+        <Form.Group className="mb-3" >
           <Form.Label>Description</Form.Label>
           <Form.Control
             size="sm"

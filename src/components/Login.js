@@ -47,7 +47,7 @@ function LoginPage(props) {
 
   return (
     <Container>
-      <Form onSubmit={handleLoginSubmit}>
+      <Form onSubmit={handleLoginSubmit} novalidate>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -56,6 +56,7 @@ function LoginPage(props) {
             name="email"
             value={email}
             onChange={handleEmail}
+            required
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -70,6 +71,7 @@ function LoginPage(props) {
             name="password"
             value={password}
             onChange={handlePassword}
+            required
           />
         </Form.Group>
         <Button variant="primary" type="submit">

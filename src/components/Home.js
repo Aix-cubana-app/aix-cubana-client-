@@ -1,7 +1,14 @@
+import { Container } from "react-bootstrap";
+
 function Home(){    
 
     return(
-        <h1>We are on the homepage</h1>
+        <Container>
+            <img src="https://www.superiorballroomdance.com/wp-content/uploads/2015/10/Ballroom-Dancers.jpg" alt="dancing people" />
+            
+
+
+        </Container>
 
     )
 
