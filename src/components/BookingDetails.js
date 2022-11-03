@@ -55,6 +55,7 @@ function BookingDetails(){
                 <Card.Header>{details.service?.title}</Card.Header>
                 <Card.Body>
                   <Card.Title>{details.service?.style}</Card.Title>
+                  <Card.Text>Level: {details.service?.level}</Card.Text>
                   <Card.Text>Description: {details.description}</Card.Text>
                   <Card.Text>Date: {details.date}</Card.Text>
                   {user.isTeacher ? 

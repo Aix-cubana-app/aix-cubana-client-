@@ -31,6 +31,7 @@ function TeacherBookings({ bookings, updateBookings }) {
                 <Card.Header>{booking.service?.title}</Card.Header>
                 <Card.Body>
                   <Card.Title>{booking.service?.style}</Card.Title>
+                  <Card.Text>Level: {booking.service?.level}</Card.Text>
                   <Card.Text>Description: {booking.description}</Card.Text>
                   <Card.Text>Date: {booking.date}</Card.Text>
                   <Link to={`/booking/details/${booking._id}`}>

@@ -140,6 +140,7 @@ function ServiceEdit() {
           name="level"
           id="level-select"
           form="create-service-form"
+          value={level}
           required
           onChange={(e) => {
             setLevel(e.target.value);
