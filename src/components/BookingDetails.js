@@ -44,6 +44,19 @@ function BookingDetails(){
         
     }
 
+    const deleteBooking = (token, bookingId) => {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/api/booking/${bookingId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((deletedBooking) => {       
+          navigate(-1);
+        })
+        .catch((err) =>
+          console.log("Problem deleting the services from database" + err)
+        );
+    };
+
   
 
 
@@ -66,8 +79,9 @@ function BookingDetails(){
                   :  
                   <Card.Text>Teacher: {details.teacher?.name}</Card.Text>}
                   
-                  <Button onClick={ () => navigate(-1)} variant="outline-dark">Back</Button>
                   
+                  <Button onClick={ () => navigate(-1)} variant="outline-dark">Back</Button>
+                  <Button onClick={ () => deleteBooking( storedToken, id )} variant="danger">Delete</Button>
                   
                   
                  
