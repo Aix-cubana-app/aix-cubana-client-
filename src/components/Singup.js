@@ -28,15 +28,25 @@ function SignupPage() {
   };
 
   const handleSignupSubmit = (e) => {
+
     e.preventDefault();
 
     const requestBody = { email, password, name, isTeacher };
 
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/signup`, requestBody)
-      .then((newUser) => {
-        authenticateUser();        
+      .then( (response) => {
+
+        
+        // Save the token in the localStorage.
+        storeToken(response.data.authToken);
+
+        // Verify the token by sending a request
+        // to the server's JWT validation endpoint.
+        authenticateUser();
+            
         navigate("/");
+
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
