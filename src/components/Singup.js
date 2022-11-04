@@ -1,11 +1,12 @@
 // src/pages/SignupPage.js
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import { AuthContext } from "../context/auth.context";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ function SignupPage() {
   const [name, setName] = useState("");
   const [isTeacher, setIsTeacher] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
+
+  const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -32,7 +35,7 @@ function SignupPage() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/signup`, requestBody)
       .then((newUser) => {
-        console.log("You created a new User");
+        authenticateUser();        
         navigate("/");
       })
       .catch((error) => {
@@ -98,10 +101,14 @@ function SignupPage() {
           />
         </Form.Group>
 
+      {errorMessage && (
+        <p>User already exist</p>
+      )}
         <Button variant="primary" type="submit">
           SingUp
         </Button>
       </Form>
+
 
       <Container>
         <p>Already have account?</p>

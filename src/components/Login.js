@@ -74,10 +74,17 @@ function LoginPage(props) {
             required
           />
         </Form.Group>
+
+      {errorMessage && (
+        <p>Wrong username or password</p>
+      )}
+      
         <Button variant="primary" type="submit">
           LogIn
         </Button>
       </Form>
+
+
     </Container>
    
   );
