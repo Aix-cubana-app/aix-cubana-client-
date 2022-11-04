@@ -1,10 +1,9 @@
 # Aix-cubana-client
 
-##Description:
+## Description:
 This project is a website for dancing teachers and for users who want to learn how to danace. It allows the users to book a service from a teachers and lern from them. It allows the teachers to offer services that the users can book.
 
-This is the Frontend(React) of the aplication. Here is gitHub repo here:
-(https://github.com/Aix-cubana-app/aix-cubana-client-)
+This is the Frontend(React) of the aplication. Here is gitHub repo here: https://github.com/Aix-cubana-app/aix-cubana-client-
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -17,7 +16,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Instructions
 In order to test the CRUD functionalities (create, read, update, delete) for the services in the demo version, you have to register as teacher by clicking the checkbox **Are you a Teacher?**
 
-###Demo:
+### Demo:
 https://aix-cubana.netlify.app
 
 
@@ -42,7 +41,7 @@ For deployment local or online you need:
 
 
 
-### About the Authors
+### About the Author
 [Michel Pomares](https://github.com/Michel537)
 Berlin  
 Full Stack Web Developer
