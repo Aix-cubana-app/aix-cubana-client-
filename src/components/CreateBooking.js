@@ -161,7 +161,7 @@ function CreateBooking({ updateBookings }) {
                 {servicesList.map((service) => {
                   return (
                     <option key={service._id} value={service._id}>
-                      {service.title}
+                      {service.title} {service.level}
                     </option>
                   );
                 })}

@@ -13,6 +13,12 @@ function TeacherServices({ bookings, updateBookings }) {
 
   const [services, setServices] = useState([]);
 
+  const myStyle = {
+    margin: "2rem",  
+    
+    width: "18rem" 
+  };
+
   // eslint-disable-next-line
   useEffect(() => {
     getServices(storedToken);
@@ -43,7 +49,7 @@ function TeacherServices({ bookings, updateBookings }) {
                   <Card
                     key={service._id}
                     border="dark"
-                    style={{ width: "18rem" }}
+                    style={myStyle}
                   >
                     <Card.Header>{service.title}</Card.Header>
                     <Card.Body>
