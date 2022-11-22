@@ -7,6 +7,7 @@ import { AuthContext } from "../context/auth.context";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
+import { Alert } from "react-bootstrap";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -18,6 +19,8 @@ function LoginPage(props) {
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+
+  
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -75,18 +78,18 @@ function LoginPage(props) {
           />
         </Form.Group>
 
-      {errorMessage && (
-        <p>Wrong username or password</p>
-      )}
-      
+        {errorMessage && (
+          <Container >
+            <Alert variant="danger">
+              <Alert.Heading>Wrong LogIn credentials</Alert.Heading>
+            </Alert>
+          </Container>
+        )}
         <Button variant="primary" type="submit">
           LogIn
         </Button>
       </Form>
-
-
     </Container>
-   
   );
 }
 
