@@ -1,7 +1,7 @@
 # Aix-cubana-client
 
 ## Description:
-This project is a website for dancing teachers and for users who want to learn how to danace. It allows the users to book a service from a teachers and lern from them. It allows the teachers to offer services that the users can book.
+This project is a website for dancing teachers and for users who want to learn how to dance. It allows the users to book a service from a teachers and lern from them. It allows the teachers to offer services that the users can book.
 
 This is the Frontend(React) of the aplication. Here is gitHub repo here: https://github.com/Aix-cubana-app/aix-cubana-client-
 
