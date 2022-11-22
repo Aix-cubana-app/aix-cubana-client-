@@ -19,6 +19,10 @@ In order to test the CRUD functionalities (create, read, update, delete) for the
 ### Demo:
 https://aix-cubana.netlify.app
 
+## Test credentials:
+Email: user@gmail.com
+Password: User1234
+
 
 
 #### For Devs
