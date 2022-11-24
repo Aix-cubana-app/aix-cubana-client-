@@ -22,11 +22,14 @@ function UserBookings({ bookings, updateBookings }) {
 
   return (
     <>
+    <br />
       {!bookings ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       ) : (
+        <> 
+        <br /> <br /> <br />
         <Container>
           <Row className="justify-content-md-center">
             {bookings && bookings.length !== 0 ? (
@@ -53,6 +56,7 @@ function UserBookings({ bookings, updateBookings }) {
             )}
           </Row>
         </Container>
+        </>
       )}
     </>
   );

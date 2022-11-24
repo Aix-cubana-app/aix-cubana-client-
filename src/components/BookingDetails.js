@@ -72,7 +72,7 @@ function BookingDetails(){
                   <Card.Text>Description: {details.description}</Card.Text>
                   <Card.Text>Date: {details.date}</Card.Text>
                   {user.isTeacher ? 
-                  <>
+                  <>                  
                   <Card.Text>RequestedBy: {details.owner?.name}</Card.Text> 
                   <Card.Text>Teacher: {details.teacher?.name}</Card.Text>
                   </>

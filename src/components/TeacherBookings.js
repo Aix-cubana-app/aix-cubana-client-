@@ -21,6 +21,7 @@ function TeacherBookings({ bookings, updateBookings }) {
 
   return (
     <>
+    <br />
       {!bookings ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -37,7 +38,7 @@ function TeacherBookings({ bookings, updateBookings }) {
                       <Card.Title>{booking.service?.style}</Card.Title>
                       <Card.Text>Level: {booking.service?.level}</Card.Text>
                       <Card.Text>Description: {booking.description}</Card.Text>
-                      <Card.Text>Date: {booking.date}</Card.Text>
+                      <Card.Text>Date: {booking.date}</Card.Text>                      
                       <Link to={`/booking/details/${booking._id}`}>
                         <Button variant="outline-dark">More Details</Button>
                       </Link>
