@@ -21,7 +21,7 @@ function Home() {
             <Card.Body>
               <Card.Title>Maikel Fonts</Card.Title>
               <Card.Text>
-                World famous salsa and rumba teacher. Many years of expericne as
+                World famous salsa and rumba teacher. Many years of experience as
                 a profesional dancer and teacher.
               </Card.Text>
             </Card.Body>

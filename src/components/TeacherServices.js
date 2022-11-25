@@ -39,6 +39,7 @@ function TeacherServices({ bookings, updateBookings }) {
 
   return (
     <>
+    <br />
       {!services ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
