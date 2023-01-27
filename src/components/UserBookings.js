@@ -15,7 +15,7 @@ function UserBookings({ bookings, updateBookings }) {
     width: "18rem",
   };
 
-  // eslint-disable-next-line
+  
   useEffect(() => {
     updateBookings(storedToken);
   }, []);

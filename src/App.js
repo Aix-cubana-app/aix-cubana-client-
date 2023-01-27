@@ -1,5 +1,5 @@
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import SignupPage from "./components/Singup";
 import LoginPage from "./components/Login";
 import IsPrivate from "./components/IsPrivate";
@@ -18,6 +18,7 @@ import NavbarPage from "./components/NavbarPage";
 import CreateService from "./components/CreateService";
 import ServiceEdit from "./components/ServiceEdit";
 import { Container } from "react-bootstrap";
+import AboutPage from "./components/AboutPage";
 
 function App() {
   const [bookings, setBookings] = useState([]);
@@ -35,9 +36,6 @@ function App() {
       );
   };
 
-
-
-  
   return (
     <div className="App">
       <NavbarPage />
@@ -62,6 +60,16 @@ function App() {
             </IsAnon>
           }
         />
+
+        <Route
+          path="/about/"
+          element={
+            <IsAnon>
+              <AboutPage />
+            </IsAnon>
+          }
+        />
+
         <Route
           path="/bookings/user"
           element={
@@ -114,12 +122,6 @@ function App() {
 
         <Route path="/service/edit/:id" element={<ServiceEdit />} />
       </Routes>
-
-      
-
-
-        
-
     </div>
   );
 }

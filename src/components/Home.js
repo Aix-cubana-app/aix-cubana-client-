@@ -1,5 +1,4 @@
 import { Card, CardGroup, Container, Image } from "react-bootstrap";
-import CarouselPage from "./CarouselPage";
 import maikelF from "../../src/components/media/img/salsa-dancer-maykel-fonts.jpg";
 import laAlemana from "../../src/components/media/img/bachata-dancer-la-alemana.jpg";
 import kizomba from "../../src/components/media/img/kizomba2.jpg";
